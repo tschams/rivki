@@ -1,17 +1,46 @@
 
     * {
       box-sizing: border-box;
+      direction: ltr;
     }
     
-    #myInput {
-      background-image: url('/css/searchicon.png');
+    h2{
+      direction: ltr;
+      width: 100%;
+    }
+
+    #options{
+      align-self: center;
+    }
+
+    input{
+      direction: ltr;
+      position: left;
+      padding-left: 30px;
+      background-size: 20px;
       background-position: 10px 12px;
       background-repeat: no-repeat;
-      width: 100%;
+      width: 24%;
       font-size: 16px;
       padding: 12px 20px 12px 40px;
       border: 1px solid #ddd;
       margin-bottom: 12px;
+    }
+
+    #mySearch {
+      background-image: url('images/search_icon.png');
+    }
+
+    #myAdd{
+      background-image: url('images/add_icon.png');
+    }
+
+    #myUpdate{
+      background-image: url('images/update_icon.png');
+    }
+
+    #myDelete{
+      background-image: url('images/delete_icon.png');
     }
     
     #myUL {
@@ -34,3 +63,51 @@
     #myUL li a:hover:not(.header) {
       background-color: #eee;
     }
+
+    #show_item{
+      align-items: center;
+    }
+
+    .one_item-grid-container {
+      grid-column-start: 1;
+  grid-column-end: 1;
+  grid-row-start: 1;
+  grid-row-end: 3;
+      display: inline-flex;
+      
+      grid-template-rows: repeat(3, 100px);
+      margin-right: auto;
+      margin-left: auto;
+      height: 80PX;
+      width: 300px;
+      border-width: 5px;
+      border-color: black;
+      border-style: solid;
+      padding: 0px;
+      border-radius: 0px 0px 5px 5px;
+      background-color: white;
+      justify-content: center;
+  }
+
+    .one_item-grid-item{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 80px;
+      width: 80px;
+      text-align: center;
+    }
+
+    .one_item-grid-item img {
+      width: 50px;
+      height: 50px;
+      padding: 0px;
+      margin-right: auto;
+      margin-left: auto;
+  }
+
+  image{
+    height: 5px;
+    width: 5px;
+    
+  }
