@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,9 +12,13 @@
 </head>
 <body>
     <h2>My Phonebook</h2>
-    
-    <input type="text" id="myInput" onkeyup="search()" placeholder="Search for names.." title="Type in a name">
-    
+    <div id="options">
+      <input type="text" id="mySearch" onkeyup="search()" placeholder="Search for names.." title="Type in a name">
+      <input type="button" id="myAdd" onclick="add()"  value="Add a contact" title="Add a contact">
+      <input type="button" id="myUpdate" onkeyup="update()" value="Update" title="Update a contact">
+      <input type="button" id="myDelete" onkeyup="delete_contact()" value="Delete" title="Delete a contact">
+    </div>
+
     <ul id="myUL">
       <li><a href="#">Adele</a></li>
       <li><a href="#">Agnes</a></li>
@@ -24,7 +28,39 @@
     
       <li><a href="#">Calvin</a></li>
       <li><a href="#">Christina</a></li>
-      <li><a href="#">Cindy</a></li>
+      <li><a href="#">Cindy</a></li> 
     </ul>
+
+    <section id="show_item">
+      <div class="one_item-grid-container">
+          <div class="one_item-grid-item">
+            <img id="name" src="images/name_icon.png">
+            <p id="show_name"></p>
+          </div><br>
+          <div class="one_item-grid-item">
+            <img id="phone" src="images/phone_icon.png">
+            <p id="show_phone"></p>
+          </div><br>
+          <div class="one_item-grid-item">
+            <img id="email" src="images/email_icon.png">
+            <p id="show_email"></p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- <section id="show_item">
+      <p>
+        <img id="name" src="images/name_icon.png">
+        <p id="show_name"></p>
+      </p>
+           
+
+            <img id="phone" src="images/phone_icon.png">
+            <p id="show_phone"></p>
+
+            <img id="email" src="images/email_icon.png">
+            <p id="show_email"></p></div>
+
+    </section> -->
 </body>
-    
+  
