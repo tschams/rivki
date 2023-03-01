@@ -13,14 +13,14 @@
       align-self: center;
     }
 
-    input{
+    #options > input{
       direction: ltr;
       position: left;
       padding-left: 30px;
       background-size: 20px;
       background-position: 10px 12px;
       background-repeat: no-repeat;
-      width: 24%;
+      width: 24.5%;
       font-size: 16px;
       padding: 12px 20px 12px 40px;
       border: 1px solid #ddd;
@@ -42,72 +42,149 @@
     #myDelete{
       background-image: url('images/delete_icon.png');
     }
+
+    #returnHome{
+      background-image: url('images/home_icon.png');
+      
+      /* border: none;
+      width: 10%;
+      direction: ltr;
+      position: left;
+      /* padding-left: 30px;*/
+      /* background-size: 20px; 
+      background-position: 10px 12px;
+      background-repeat: no-repeat;
+      padding: 12px 20px 12px 40px;
+      /* border: 1px solid #ddd; 
+      margin-bottom: 12px; */ 
+    }
+
+    .page>#returnHome{
+      direction: ltr;
+      position: left;
+      padding-left: 30px;
+      background-size: 20px;
+      background-position: 10px 12px;
+      background-repeat: no-repeat;
+      width: 10px;
+      font-size: 16px;
+      padding: 12px 20px 12px 40px;
+      border: 1px solid #ddd;
+      margin-bottom: 12px;
+    }
     
+    #details>input{
+      direction: ltr;
+      position: left;
+      padding-left: 30px;
+      background-size: 20px;
+      background-position: 10px 12px;
+      background-repeat: no-repeat;
+      width: 400px;
+      font-size: 16px;
+      padding: 12px 20px 12px 40px;
+      border: 1px solid #ddd;
+      margin-bottom: 12px;
+      margin-left: 500px;
+    }
+
+   .one_item-grid-container>div>input{
+      width: 180px;
+      height: 40px;
+      align-items: center;
+    }
+
+
     #myUL {
       list-style-type: none;
       padding: 0;
       margin: 0;
     }
     
-    #myUL li a {
+    #myUL li{
       border: 1px solid #ddd;
       margin-top: -1px; /* Prevent double borders */
       background-color: #f6f6f6;
-      padding: 12px;
+      padding: 11px;
       text-decoration: none;
       font-size: 18px;
       color: black;
       display: block
     }
-    
+
     #myUL li a:hover:not(.header) {
       background-color: #eee;
     }
 
-    #show_item{
+    /* #show_item{
       align-items: center;
-    }
+      margin: auto;
+      width: 50%;
+      border: 3px solid green;
+      padding: 10px;
+    } */
 
-    .one_item-grid-container {
-      grid-column-start: 1;
-  grid-column-end: 1;
-  grid-row-start: 1;
-  grid-row-end: 3;
-      display: inline-flex;
+    .grid-container{
+      margin: auto;
+      margin-top: 100px;
       
-      grid-template-rows: repeat(3, 100px);
-      margin-right: auto;
-      margin-left: auto;
-      height: 80PX;
-      width: 300px;
-      border-width: 5px;
-      border-color: black;
-      border-style: solid;
-      padding: 0px;
-      border-radius: 0px 0px 5px 5px;
-      background-color: white;
-      justify-content: center;
+      /* width: 50%; */
+      border: 3px solid green;
+      padding: 10px;
+      display: grid;
+      grid-template-columns: repeat(2, auto);
+      width: 600px;
   }
 
-    .one_item-grid-item{
+  .grid-container > div {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 5px;
+    font-size: 20px;
+    width: auto;
+  }
+
+    /* .one_item-grid-item{
       display: flex;
       justify-content: center;
       align-items: center;
       height: 80px;
       width: 80px;
       text-align: center;
-    }
+    } */
 
-    .one_item-grid-item img {
+    /* .one_item-grid-item img {
       width: 50px;
       height: 50px;
       padding: 0px;
       margin-right: auto;
       margin-left: auto;
-  }
+  } */
 
-  image{
-    height: 5px;
-    width: 5px;
+
+
+  img{
+    height: 70px;
+    width: 70px;
     
-  }
+  } 
+
+  /**** PAGES ****/
+.page{
+  display: none;
+  width: 100%;
+  min-height: 100%; /* allow for content off the bottom of the page */
+  position: fixed;  /* or absolute if the user needs to scroll for more content */
+  padding: 1rem 2rem;
+}
+.active{
+  display: block; 
+}
+
+.details{
+  display: none;
+}
+
+#home, #add-contact{
+  background-color: hsl(60, 50%, 80%);
+}
+/* , #show-contact>#details, #update-contact */
