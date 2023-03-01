@@ -1,8 +1,10 @@
 //the contacts are saved in an array in the local storage
 //deleted contacts are marked with an id of -1
+//current user?
+let currentuser=null;//maybe saved in local storage, maybe sent... its an id
 function get(id)
 {
-    let items=JSON.parse(localStorage.getItem("arr"));
+    let items=JSON.parse(localStorage.getItem(currentuser));
     for (i = 0; i < items.length; i++) { 
         if(items[i].id===id){
             return items[i]
@@ -12,7 +14,7 @@ function get(id)
 }
 function getby(key, value)
 {
-    let items=JSON.parse(localStorage.getItem("arr"));
+    let items=JSON.parse(localStorage.getItem(currentuser));
     let result=[];
  
     for (i = 0; i < items.length; i++) {
@@ -32,6 +34,11 @@ function getby(key, value)
                     result.push(items[i]);
                 }
             }
+            if(key===email){
+                if(items[i].email=value){
+                    result.push(items[i]);
+                }
+            }
         }
         
       }
@@ -40,7 +47,7 @@ function getby(key, value)
 function getall()
 {
     let result=[];
-    items= JSON.parse(localStorage.getItem("arr"));
+    items= JSON.parse(localStorage.getItem(currentuser));
     for(i=0; i<items.length; i++){
         if(items[i]!=-1){
             result.push(items[i])
@@ -48,27 +55,19 @@ function getall()
     }
     return result;
 }
-function update(id, key, value)
+function update(contact)
 {
-    let items=JSON.parse(localStorage.getItem("arr"));
+    let items=JSON.parse(localStorage.getItem(currentuser));
     if(items===null){
         //do something? do we have to take care of errors?
     }
     for(i=0; i<items.length; i++){
-        if(items[i].id===id){
-            if(key===number){//maybe think how to make this general and specific to our project
-                items[i].number=value;
-            }
-            if(key===firstname){
-                items[i].firstname=value;
-            }
-            if(key===lastname){
-                items[i].lastname=value;
-            }
+        if(items[i].id===contact.id){
+            items[i]=contact;
         }
     }
-    localStorage.removeItem("arr");
-    localStorage.setItem("arr", JSON.stringify(items));
+    localStorage.removeItem(currentuser);
+    localStorage.setItem(currentuser, JSON.stringify(items));
 }
 function remove(id)
 {
@@ -81,21 +80,21 @@ function remove(id)
             items[i].id=-1;//also here might be an error if the item doesnt exist
         }
     }
-    localStorage.removeItem("arr");
-    localStorage.setItem("arr", JSON.stringify(items));
+    localStorage.removeItem(currentuser);
+    localStorage.setItem(currentuser, JSON.stringify(items));
 }
 function set(item)
 {
-    let items=JSON.parse(localStorage.getItem("arr"));
+    let items=JSON.parse(localStorage.getItem(currentuser));
     if(items===null)
     {
         items=[];
     }
     else{
-        localStorage.removeItem("arr");
+        localStorage.removeItem(currentuser);
     }
     items.push(item);
-    localStorage.setItem("arr", JSON.stringify(items));
+    localStorage.setItem(currentuser, JSON.stringify(items));
    
 }
 
