@@ -1,10 +1,9 @@
 //the contacts are saved in an array in the local storage
 //deleted contacts are marked with an id of -1
-//current user?
-let currentuser=null;//maybe saved in local storage, maybe sent... its an id
-function get(id)
+
+function get(user, id)
 {
-    let items=JSON.parse(localStorage.getItem(currentuser));
+    let items=JSON.parse(localStorage.getItem(user));
     for (i = 0; i < items.length; i++) { 
         if(items[i].id===id){
             return items[i]
@@ -12,9 +11,9 @@ function get(id)
     }
     //if not found...?
 }
-function getby(key, value)
+function getby(user, key, value)
 {
-    let items=JSON.parse(localStorage.getItem(currentuser));
+    let items=JSON.parse(localStorage.getItem(user));
     let result=[];
  
     for (i = 0; i < items.length; i++) {
@@ -44,10 +43,10 @@ function getby(key, value)
       }
       return result;
 }
-function getall()
+function getall(user)
 {
     let result=[];
-    items= JSON.parse(localStorage.getItem(currentuser));
+    items= JSON.parse(localStorage.getItem(user));
     for(i=0; i<items.length; i++){
         if(items[i]!=-1){
             result.push(items[i])
@@ -55,21 +54,21 @@ function getall()
     }
     return result;
 }
-function update(contact)
+function update(user, item)
 {
-    let items=JSON.parse(localStorage.getItem(currentuser));
+    let items=JSON.parse(localStorage.getItem(user));
     if(items===null){
         //do something? do we have to take care of errors?
     }
     for(i=0; i<items.length; i++){
-        if(items[i].id===contact.id){
-            items[i]=contact;
+        if(items[i].id===item.id){
+            items[i]=item;
         }
     }
-    localStorage.removeItem(currentuser);
-    localStorage.setItem(currentuser, JSON.stringify(items));
+    localStorage.removeItem(user);
+    localStorage.setItem(user, JSON.stringify(items));
 }
-function remove(id)
+function remove(user, id)
 {
     let items=JSON.parse(localStorage.getItem("arr"));
     if(items===null){
@@ -80,10 +79,10 @@ function remove(id)
             items[i].id=-1;//also here might be an error if the item doesnt exist
         }
     }
-    localStorage.removeItem(currentuser);
-    localStorage.setItem(currentuser, JSON.stringify(items));
+    localStorage.removeItem(user);
+    localStorage.setItem(user, JSON.stringify(items));
 }
-function set(item)
+function set(user, item)
 {
     let items=JSON.parse(localStorage.getItem(currentuser));
     if(items===null)
@@ -91,10 +90,10 @@ function set(item)
         items=[];
     }
     else{
-        localStorage.removeItem(currentuser);
+        localStorage.removeItem(user);
     }
     items.push(item);
-    localStorage.setItem(currentuser, JSON.stringify(items));
+    localStorage.setItem(user, JSON.stringify(items));
    
 }
 

@@ -1,24 +1,26 @@
 class FXMLHttpRequest {
   constructor(){
-    this.onload()=null;
-    this.responsetext=null;
+   // this.onload=()=>{};
+   // this.text=null;
    
   }
-  open(method, file){
+  open(method, url, async=true, user="", psw=""){
     
-    let fajax="";
-   
-    let ans=request(fajax);
+    this.method=method;
+    this.url=url;
+    this.async=async;
+    this.user=user;
+    this.psw=psw;
 
     
   }
-  send(){
+  send(data=null){
+    this.text=data;
+    let ans=network.request(JSON.stringify(this));//find out how to have access
+    this.text=ans;//this is WRONG. response contains many things, including text
     if(this.onload!=null){
       this.onload();
     }
-  }
-  send(info){
-
   }
    
 
@@ -42,7 +44,7 @@ class FXMLHttpRequest {
 
 
 
-
+/*
 
     class FXMLHttpRequest {
       constructor(){
