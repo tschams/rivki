@@ -1,60 +1,92 @@
 //the contacts are saved in an array in the local storage
+//deleted contacts are marked with an id of -1
 function get(id)
 {
-    return localStorage.getItem(id);
+    let items=JSON.parse(localStorage.getItem("arr"));
+    for (i = 0; i < items.length; i++) { 
+        if(items[i].id===id){
+            return items[i]
+        }
+    }
+    //if not found...?
 }
 function getby(key, value)
 {
-    let list=[]
-    for (i = 0; i < localStorage.length; i++) {
-        let x = localStorage.key(i);
-        if(x.value instanceof person)
-        {
-            item = JSON.parse(x.value);
-            if(item.key===value)//i think this is wrong
-                 {list.push(item.value)}
+    let items=JSON.parse(localStorage.getItem("arr"));
+    let result=[];
+ 
+    for (i = 0; i < items.length; i++) {
+        if(items[i]!=-1){
+            if(key===number){//maybe think how to make this general and specific to our project
+                if(items[i].number=value){
+                    result.push(items[i]);
+                }
+            }
+            if(key===firstname){
+                if(items[i].firstname=value){
+                    result.push(items[i]);
+                }
+            }
+            if(key===lastname){
+                if(items[i].lastname=value){
+                    result.push(items[i]);
+                }
+            }
         }
+        
       }
-      return list;
+      return result;
 }
 function getall()
 {
-    let list=[]
-    for (i = 0; i < localStorage.length; i++) {
-        let item = localStorage.key(i);
-        if(item.value instanceof person)
-            {list.push(JSON.parse(item.value))}
-      }
-    return list;
+    let result=[];
+    items= JSON.parse(localStorage.getItem("arr"));
+    for(i=0; i<items.length; i++){
+        if(items[i]!=-1){
+            result.push(items[i])
+        }
+    }
+    return result;
 }
-function update(id, key, value)//id, key of what to update, new value
+function update(id, key, value)
 {
-    x=localStorage.getItem(id);
-    item=JSON.parse(item);
-    item.vaue.key=value;//i think this is wrong
-    val=JSON.stringify(item)
-    localStorage.removeItem(id);
-    localStorage.setItem(id, val);
-}
-//all obove this line need to change them to make it an array
-function remove(id)
-{
-    let items=JSON.parse(localStorage.getItem("arr"));//check in proj 2 if this is how you check
+    let items=JSON.parse(localStorage.getItem("arr"));
     if(items===null){
         //do something? do we have to take care of errors?
     }
     for(i=0; i<items.length; i++){
         if(items[i].id===id){
-            delete items[i];//also here might be an error if the item doesnt exist
+            if(key===number){//maybe think how to make this general and specific to our project
+                items[i].number=value;
+            }
+            if(key===firstname){
+                items[i].firstname=value;
+            }
+            if(key===lastname){
+                items[i].lastname=value;
+            }
         }
     }
     localStorage.removeItem("arr");
-    val=JSON.stringify(items)//make sure you need to stringify arrays?
-    localStorage.setItem("arr", val);
+    localStorage.setItem("arr", JSON.stringify(items));
+}
+function remove(id)
+{
+    let items=JSON.parse(localStorage.getItem("arr"));
+    if(items===null){
+        //do something? do we have to take care of errors?
+    }
+    for(i=0; i<items.length; i++){
+        if(items[i].id===id){
+            items[i].id=-1;//also here might be an error if the item doesnt exist
+        }
+    }
+    localStorage.removeItem("arr");
+    localStorage.setItem("arr", JSON.stringify(items));
 }
 function set(item)
 {
-    let items=JSON.parse(localStorage.getItem("arr"));//check in proj 2 if this is how you check
+    let items=JSON.parse(localStorage.getItem("arr"));
     if(items===null)
     {
         items=[];
@@ -63,8 +95,9 @@ function set(item)
         localStorage.removeItem("arr");
     }
     items.push(item);
-    val=JSON.stringify(items)//make sure you need to stringify arrays?
-    localStorage.setItem("arr", val);
+    localStorage.setItem("arr", JSON.stringify(items));
    
 }
-//check if .value is the right way to retrieve items
+
+//do i need a db-api?
+//figure out which files need to be connected to html
