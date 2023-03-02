@@ -78,7 +78,6 @@ function serverrecieve(fajax)
       }
       
 
-      //add: getby     
     }
     if(method==="PUT"){//or patch? 
       if(fajax.data instanceof contact){
