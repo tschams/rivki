@@ -1,19 +1,19 @@
 //the contacts are saved in an array in the local storage
 //deleted contacts are marked with an id of -1
 
-function get(user, id)
+function get(username, id)
 {
-    let items=JSON.parse(localStorage.getItem(user));
+    let items=JSON.parse(localStorage.getItem(username));
     for (i = 0; i < items.length; i++) { 
         if(items[i].id===id){
             return items[i]
         }
     }
-    //if not found...?
+    return null;
 }
-function getby(user, key, value)
+function getby(username, key, value)
 {
-    let items=JSON.parse(localStorage.getItem(user));
+    let items=JSON.parse(localStorage.getItem(username));
     let result=[];
  
     for (i = 0; i < items.length; i++) {
@@ -43,10 +43,10 @@ function getby(user, key, value)
       }
       return result;
 }
-function getall(user)
+function getall(username)
 {
     let result=[];
-    items= JSON.parse(localStorage.getItem(user));
+    items= JSON.parse(localStorage.getItem(username));
     for(i=0; i<items.length; i++){
         if(items[i]!=-1){
             result.push(items[i])
@@ -54,48 +54,79 @@ function getall(user)
     }
     return result;
 }
-function update(user, item)
+function update(username, item)
 {
-    let items=JSON.parse(localStorage.getItem(user));
+    let items=JSON.parse(localStorage.getItem(username));
     if(items===null){
-        //do something? do we have to take care of errors?
+        return false;
     }
+    let found=false;
     for(i=0; i<items.length; i++){
         if(items[i].id===item.id){
             items[i]=item;
+            found=true;
         }
     }
-    localStorage.removeItem(user);
-    localStorage.setItem(user, JSON.stringify(items));
+    if(found===false){
+        return false;
+    }
+    localStorage.removeItem(username);
+    localStorage.setItem(username, JSON.stringify(items));
+    return true;
 }
-function remove(user, id)
+function remove(username, id)
 {
     let items=JSON.parse(localStorage.getItem("arr"));
     if(items===null){
-        //do something? do we have to take care of errors?
+        return false;
     }
+    let found=false;
     for(i=0; i<items.length; i++){
         if(items[i].id===id){
-            items[i].id=-1;//also here might be an error if the item doesnt exist
+            items[i].id=-1;
+            found=true;
         }
     }
-    localStorage.removeItem(user);
-    localStorage.setItem(user, JSON.stringify(items));
+    if(found===false){
+        return false;
+    }
+    localStorage.removeItem(username);
+    localStorage.setItem(username, JSON.stringify(items));
+    return true;
 }
-function set(user, item)
+function set(username, item)
 {
-    let items=JSON.parse(localStorage.getItem(currentuser));
+    let items=JSON.parse(localStorage.getItem(user));
     if(items===null)
     {
         items=[];
     }
     else{
-        localStorage.removeItem(user);
+        localStorage.removeItem(username);
     }
     items.push(item);
-    localStorage.setItem(user, JSON.stringify(items));
+    localStorage.setItem(username, JSON.stringify(items));
    
 }
-
-//do i need a db-api?
-//figure out which files need to be connected to html
+//we will have an array of users
+function setuser(user){
+    let users=JSON.parse(localStorage.getItem("users"));
+    for(i=0; i<users.length; i++){
+        if(users[i].password===user.password||users[i].name===user.name){
+            return false;
+        }
+    }
+    users.push(user);
+    localStorage.removeItem("users");
+    localStorage.setItem("users", JSON.stringify(users));
+    return true;
+}
+function getuser(user){
+    let users=JSON.parse(localStorage.getItem("users"));
+    for(i=0; i<users.length; i++){
+        if(users[i].password===user.password && users[i].name===user.name){
+            return users[i];
+        }
+    }
+    return null;
+}

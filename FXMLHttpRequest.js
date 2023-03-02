@@ -1,23 +1,25 @@
 class FXMLHttpRequest {
   constructor(){
-   // this.onload=()=>{};
+    this.onload=()=>{};
    // this.text=null;
    
   }
-  open(method, url, async=true, user="", psw=""){
+  open(method, url, async=true, username=""){
     
     this.method=method;
     this.url=url;
     this.async=async;
-    this.user=user;
-    this.psw=psw;
+    this.username=username;
+   
 
     
   }
   send(data=null){
-    this.text=data;
-    let ans=network.request(JSON.stringify(this));//find out how to have access
-    this.text=ans;//this is WRONG. response contains many things, including text
+    this.data=data;
+    let reponse=network.request(this);//find out how to have access
+    this.text=response.responsetext;
+    this.status=response.status;
+    this.message=response.message;
     if(this.onload!=null){
       this.onload();
     }
@@ -25,12 +27,7 @@ class FXMLHttpRequest {
    
 
   }
-  /*
-  status + statustext:
-  200 ok
-  403 forbidden
-  404 not found
-  */
+ 
 
   /* this.readystate=0;
     

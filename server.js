@@ -1,39 +1,99 @@
 
 function serverrecieve(fajax)
 {
-    const request = JSON.parse(fajax);//not sure about this, what the format is...
-    //POST, GET, PUT, PATCH, and DELETE. These correspond to create, read, update, and delete
-    
-    if(method==="POST"){
-      database.set(request.user, request.text);
-       
+    let method=fajax.method;
+    //POST, GET, PUT, and DELETE. These correspond to create, read, update, and delete
+    let text="";
+      /*
+  status + statustext:
+  200 ok
+  403 forbidden
+  404 not found
+  */
+    let statusnum=404;
+    let statustext="not found";
+    if(method==="POST"){//add contact
+      if(typeof fajax.data === contact){
+        database.set(fajax.username, fajax.data);
+      statusnum=200;
+      statustext="ok";
+      }
+      if(typeof fajax.data === user){//user sign up
+        let check= database.setuser(fajax.data);
+        if(check===false){
+          statusnum=403;
+          statustext="forbidden";
+        }
+        else{
+          statusnum=200;
+          statustext="ok";
+        }
+      }
+      else{//data wasn't valid
+        statusnum=403;
+        statustext="forbidden";
+      }
+      
+
     }
     if(method==="GET"){
-      if(typeof data == 'number'){//get one
-        
-        //contact person= database.get(request.text);
-        //return
+      if(typeof data === 'number'){//get one
+        text= database.get(request.data);
+        if(text!=null){
+          statusnum=200;
+          statustext="ok";
+
+        }
       }
-      else{//get all
-        
-        database.getall(request.user)
-        //return
+      if(typeof data === user){//get all
+        text= database.getall(request.data)
+        if(text!=null){
+          statusnum=200;
+          statustext="ok";
+        }
       }
-      //getby?
+      //add:
+      //getby
+      //sign in
     }
     if(method==="PUT"){//or patch?
-       database.update(request.user, request.text);
+       let check=database.update(request.username, request.data);
+       if(check===true){
+        statusnum=200;
+        statustext="ok";
+      }
     }
     if(method==="DELETE"){//or patch?
-      database.remove(request.user, request.text);
+      let check=database.remove(request.user, request.data);
+      if(check===true){
+        statusnum=200;
+        statustext="ok";
+      }
    }
-   //and what about signing in?
-    //from the data we got build http response and send through network
-    //return...
+   
+    let response={
+      responsetext: text,
+      status: statusnum,
+      message: statustext
 
-    
+    }
+    return response;
+
+  /*
+things to do:
+
+fix the elses so they will be on both ifs
+make sure typeof with a type i created works
+add all the rest of the 403 elses
+sign in
+getby
+  
+  */  
+
+
+
+
 }
 
 
 
-//
