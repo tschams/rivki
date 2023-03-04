@@ -4,6 +4,11 @@
       direction: ltr;
     }
     
+    img{
+      height: 70px;
+      width: 70px;
+    } 
+
     h2{
       direction: ltr;
       width: 100%;
@@ -44,7 +49,11 @@
     }
 
     #returnHome{
-      background-image: url('images/home_icon.png');
+      width: 85px;
+    }
+
+    /* #returnHome{
+      background-image: url('images/home_icon.png'); */
       
       /* border: none;
       width: 10%;
@@ -57,9 +66,9 @@
       padding: 12px 20px 12px 40px;
       /* border: 1px solid #ddd; 
       margin-bottom: 12px; */ 
-    }
+    /* } */
 
-    .page>#returnHome{
+    /* .page>#returnHome{
       direction: ltr;
       position: left;
       padding-left: 30px;
@@ -71,7 +80,7 @@
       padding: 12px 20px 12px 40px;
       border: 1px solid #ddd;
       margin-bottom: 12px;
-    }
+    } */
     
     #details>input{
       direction: ltr;
@@ -161,29 +170,27 @@
   } */
 
 
-
-  img{
-    height: 70px;
-    width: 70px;
-    
-  } 
-
   /**** PAGES ****/
-.page{
+/*.page{
   display: none;
   width: 100%;
   min-height: 100%; /* allow for content off the bottom of the page */
-  position: fixed;  /* or absolute if the user needs to scroll for more content */
-  padding: 1rem 2rem;
-}
-.active{
+  /*position: fixed;  /* or absolute if the user needs to scroll for more content*/
+  /* padding: 1rem 2rem;
+} 
+/* .active{
   display: block; 
-}
+} */
 
-.details{
+#home, #show-contact, #add-contact, #update-contact{
   display: none;
-}
+}  
 
+#home{
+  display: none;
+} 
+
+/*
 #home, #add-contact{
   background-color: hsl(60, 50%, 80%);
 }

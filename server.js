@@ -15,8 +15,8 @@ function serverrecieve(fajax)
     if(method==="POST"){//add contact
       if(fajax.data instanceof contact){
         database.set(fajax.username, fajax.data);
-      statusnum=200;
-      statustext="ok";
+        statusnum=200;
+        statustext="ok";
       }
       else{
         if( fajax.data instanceof user){//user sign up

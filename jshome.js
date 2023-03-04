@@ -16,27 +16,51 @@ window.onclick = function(event) {
 function login(){
 
  // f.setAttribute('method',"post");
-
-  let password=document.getElementById("loginpsw").value;
-  let user=JSON.parse(localStorage. getItem(password));
-  if(user===null){
-    alert('incorrect information');
-    return false;
-  }
-  let name=user.username;
-  if(name!=document.getElementById("loginname").value){
-    alert('incorrect information');
-    return false;
    
-  }
-  if(localStorage. getItem("thisuser")!=null){
-    localStorage.removeItem("thisuser");
-  }
-  localStorage.setItem("thisuser", password);
-  if(document.getElementById("entr")===null){
-    console.log("mistake");
-  }
-  return true;
+  let input_name=document.getElementById("loginname").value;   
+  let input_password=document.getElementById("loginpsw").value;
+  let user_in = new user(input_password,input_name);
+  // let user=JSON.parse(localStorage. getItem(password));
+  // Create an XMLHttpRequest object
+   const xhttp = new FXMLHttpRequest();
+   // Define a callback function
+   xhttp.onload = function() {
+    if (this.status == 200){
+        // open("homepage.html");
+        // window.top.close();
+        enter();
+    }
+    else{
+      if(this.status == 404){
+        alert("The page was not found");
+      }else{
+        alert("Username or password is incorrect");
+      }
+    }
+   }
+   
+   // Send a request
+   let url = '/api/login';
+   xhttp.open("GET", url, true, user_in.name, user_in.password);
+   xhttp.send();
+  // if(user===null){
+  //   alert('incorrect information');
+  //   return false;
+  // }
+  // let name=user.username;
+  // if(name!=document.getElementById("loginname").value){
+  //   alert('incorrect information');
+  //   return false;
+   
+  // }
+  // if(localStorage. getItem("thisuser")!=null){
+  //   localStorage.removeItem("thisuser");
+  // }
+  // localStorage.setItem("thisuser", password);
+  // if(document.getElementById("entr")===null){
+  //   console.log("mistake");
+  // }
+  // return true;
   //document.getElementById("entr").style.visibility="visible";
   
   
@@ -45,31 +69,69 @@ function login(){
 function signup(){
   
   let password=document.getElementById("psw").value;
-  let name=document.getElementById("name").value
-  if(password!=document.getElementById("pswrpt").value || localStorage.getItem(password)!=null ){
-    alert('incorrect information');
-   
-    return false;
+  let name=document.getElementById("name").value;
+  let newUser = new user(password, name);
+  // Create an XMLHttpRequest object
+  const xhttp = new FXMLHttpRequest();
+  // Define a callback function
+  xhttp.onload = function() {
+    if (this.status == 200){
+      // open("homepage.html");
+      // window.top.close();
+      enter();
+  }
+  else{
+    if(this.status == 404){
+      alert("The page was not found");
+    }else{
+      alert("Username is already taken.\n Please choose another one");
+    }
+  }
+ }
   
-  }
-  var user={//saved as an object so more information can be added to it later
-    username: name 
-  };
-  localStorage.setItem(password, JSON.stringify(user));
-  if(localStorage. getItem("thisuser")!=null){
-    localStorage.removeItem("thisuser");
-  }
-  localStorage.setItem("thisuser", password);
-  console.log("saved");
-  return true;
+  // Send a request
+  let url = '/api/signup';
+  xhttp.open("POST", url, true, name, password);
+  xhttp.send(newUser);
+
+
+  // if(password!=document.getElementById("pswrpt").value || localStorage.getItem(password)!=null ){
+  //   alert('incorrect information');
+  //   return false;
+  // }
+  // var user={//saved as an object so more information can be added to it later
+  //   username: name 
+  // };
+  // localStorage.setItem(password, JSON.stringify(user));
+  // if(localStorage. getItem("thisuser")!=null){
+  //   localStorage.removeItem("thisuser");
+  // }
+  // localStorage.setItem("thisuser", password);
+  // console.log("saved");
+  // return true;
   //document.getElementById("entr").style.visibility="visible";
 
   
   
 }
 
-function enter(){
-  window.location.href="homepage.html";
+function enter(user){
+    // Create an XMLHttpRequest object
+    const xhttp = new FXMLHttpRequest();
+    // Define a callback function
+    xhttp.onload = function() {
+      if (this.status == 200){
+        window.location.href="homepage.html";
+    }
+    else{
+      enter(user);
+    }
+   }
+    
+    // Send a request
+    let url = '/api/setcurrentuser';
+    xhttp.open("POST", url);
+    xhttp.send(user);
 }
 
 /*
