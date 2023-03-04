@@ -94,6 +94,7 @@ function remove(username, id)
     localStorage.setItem(username, JSON.stringify(items));
     return true;
 }
+
 function set(username, item)
 {
     let items=JSON.parse(localStorage.getItem(user));

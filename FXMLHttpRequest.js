@@ -3,12 +3,13 @@ class FXMLHttpRequest {
     this.onreadystatechange=()=>{};
     this.readystate=0;   
   }
-  open(method, url, async=true, username=""){
+  open(method, url, async=true, username="", password = ""){
     
     this.method=method;
     this.url=url;
     this.async=async;
     this.username=username;
+    this.password = password;
     this.readystate=1;
     this.onreadystatechange();
     

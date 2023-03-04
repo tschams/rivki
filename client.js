@@ -1,40 +1,47 @@
+// import {} from "./FXMLHttpRequest.js";
 addEventListener("load", init);
+const currentUser = addEventListener("load", getCurrentUser);
+
 // find a way to save the current user from the page of login
 
 // get the current user from the database and use it for all the requests
 // in this way, other users can alse use this website 
-// function getCurrentUser(){
-//     // Create an XMLHttpRequest object
-//     const xhttp = new FXMLHttpRequest();
-//     // Define a callback function
-//     let myUser;
-//     xhttp.onload = function() {
-//         if (this.status == 200){
-//             myUser = JSON.parse(this.responseText);
-//         }
-//         else{
-//             getCurrentUser();
-//         }
-//     }
+function getCurrentUser(){
+    
+    // Create an XMLHttpRequest object
+    const xhttp = new FXMLHttpRequest();
+    // Define a callback function
+    let myUser;
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200){
+            myUser = JSON.parse(this.responseText);
+        }
+        else
+        if(this.status == 404 || this.status == 403){
+            console.log('from getCurrentUser');
+            getCurrentUser();
+        }
+    }
 
-//     // Send a request
-//     let url = '/api/getcurrentuser';
-//     xhttp.open("GET", url);
-//     xhttp.send();
-//     return myUser.name;
-// }
+    // Send a request
+    let url = '/api/getcurrentuser';
+    xhttp.open("GET", url);
+    xhttp.send();
+    return myUser.name;
+}
     
 // const currentUser=getCurrentUser();
-const currentUser='aaa';
+// const currentUser='aaa';
 
 
 
 function init(){
-    if(document.getElementById('addContact').style!='null'){
-        console.log('yes');
-        document.getElementById('addContact').style.display='none';
-        document.getElementById('addContact').remove();
-    }
+    
+    // if(document.getElementById('addContact').style!='null'){
+    //     console.log('yes');
+    //     document.getElementById('addContact').style.display='none';
+    //     document.getElementById('addContact').remove();
+    // }
     
     // document.getElementById('showContact').style.display='none';
     // document.getElementById('updateContact').style.display='none';
@@ -44,56 +51,58 @@ function init(){
     document.body.appendChild(clon);
     console.log("in init");
      // Create an XMLHttpRequest object
-    //  const xhttp = new FXMLHttpRequest();
-    //  // Define a callback function
-    //  xhttp.onload = function() {
-    //      if(this.readyState == 4 && this.status == 200){
-    //         let contacts = JSON.parse(this.responseText);
-    //         let element = document.getElementById("myUL");
-    //         for(let i=0; i < contacts.length; i++){
-    //             let listItem = document.createElement("li");
-    //             let node = document.createTextNode(contacts[i].name);
-    //             listItem.appendChild(node);
-    //             //console.log(listItem.textContent);
-    //             listItem.setAttribute("id", contacts[i].id);
-    //             listItem.setAttribute("name", 'contact');
-    //             element.appendChild(listItem);
-    //             element.addEventListener('click', showOneItem);
-    //         }
-    //      }
-    //      else{
-    //         alert("The action failed.\n Please try again");
-    //      }
-    //  }
+     const xhttp = new FXMLHttpRequest();
+     // Define a callback function
+     xhttp.onreadystatechange = function() {
+         if(this.readyState == 4 && this.status == 200){
+            let contacts = JSON.parse(this.responseText);
+            let element = document.getElementById("myUL");
+            for(let i=0; i < contacts.length; i++){
+                let listItem = document.createElement("li");
+                let node = document.createTextNode(contacts[i].name);
+                listItem.appendChild(node);
+                //console.log(listItem.textContent);
+                listItem.setAttribute("id", contacts[i].id);
+                listItem.setAttribute("name", 'contact');
+                element.appendChild(listItem);
+                element.addEventListener('click', showOneItem);
+            }
+         }
+         else if(this.status == 404 || this.status == 403){
+            console.log('from init');
+            alert("The action failed.\n Please try again");
+         }
+     }
 
-    //  // let currentUser = localStorage.currentUser;
-    //  // Send a request
-    //  let url = "/api/contacts";
-    //  xhttp.open("GET", url, true, currentUser);
-    //  xhttp.send();
+     // let currentUser = localStorage.currentUser;
+     // Send a request
+     let url = "/api/contacts";
+     xhttp.open("GET", url, true, currentUser);
+     xhttp.send();
+    
     //just for checking:
     // let addButton = document.getElementById("myAdd");
     // addButton.addEventListener('click', app.nav);
-    let contacts = [new contact('0501111111', 'Reuven', 'Cohen', 'yi@gmail.com'),
-                    new contact('0501111111', 'Shimon', 'Levi', 'yi@gmail.com'), 
-                    new contact('0501111111', 'Levi', 'Yisraeli', 'yi@gmail.com')];
+    // let contacts = [new contact('0501111111', 'Reuven', 'Cohen', 'yi@gmail.com'),
+    //                 new contact('0501111111', 'Shimon', 'Levi', 'yi@gmail.com'), 
+    //                 new contact('0501111111', 'Levi', 'Yisraeli', 'yi@gmail.com')];
 
-    let element = document.getElementById("myUL");
-    for(let i=0; i < contacts.length; i++){
-        let listItem = document.createElement("li");
-        let node = document.createTextNode(contacts[i].name);
-        listItem.appendChild(node);
-        //console.log(listItem.textContent);
-        listItem.setAttribute("id", contacts[i].id);
-        listItem.setAttribute("name", 'contact');
-        element.appendChild(listItem);
-        element.addEventListener('click', showOneItem);
+    // let element = document.getElementById("myUL");
+    // for(let i=0; i < contacts.length; i++){
+    //     let listItem = document.createElement("li");
+    //     let node = document.createTextNode(contacts[i].name);
+    //     listItem.appendChild(node);
+    //     //console.log(listItem.textContent);
+    //     listItem.setAttribute("id", contacts[i].id);
+    //     listItem.setAttribute("name", 'contact');
+    //     element.appendChild(listItem);
+    //     element.addEventListener('click', showOneItem);
 
-        // element.addEventListener('click', function (event){
-        //     var idStr = event.target.id;
-        //     console.log(idStr);
-        // });
-    }
+    //     // element.addEventListener('click', function (event){
+    //     //     var idStr = event.target.id;
+    //     //     console.log(idStr);
+    //     // });
+    // }
 }
  
 
@@ -158,7 +167,7 @@ function showOneItem(event){
     // Create an XMLHttpRequest object
     const xhttp = new FXMLHttpRequest();
     // Define a callback function
-    xhttp.onload = function() {
+    xhttp.onreadystatechange = function() {
         if(this.readyState == 4 && this.status == 200){
             let myContact = JSON.parse(this.responseText);
             console.log(resp);
@@ -168,7 +177,8 @@ function showOneItem(event){
             let contactID_p = document.getElementsByName("contactID");
             contactID_p[0].setAttribute("id", myContact.id);
             console.log(contactID_p);
-        }else{
+        }else if(this.status == 404 || this.status == 403){
+            console.log('from showOneItem');
             alert("The action failed.\n Please try again");
         }
         
@@ -176,7 +186,8 @@ function showOneItem(event){
     // check if it's ok and how to implement it, maybe to make a get request?
     // let currentUser = localStorage.currentUser;
     // Send a request
-    xhttp.open("GET", idStr, true, currentUser);
+    let url = "/api/contacts/" + idStr;
+    xhttp.open("GET", url, true, currentUser);
     xhttp.send();
 
     // let update_b = document.getElementById("myUpdate");
@@ -208,14 +219,14 @@ function showOneItem(event){
             // Create an XMLHttpRequest object
             const xhttp = new FXMLHttpRequest();
             // Define a callback function
-            xhttp.onload = function() {
+            xhttp.onreadystatechange = function() {
                 if(this.readyState == 4 && this.status == 200){
                     showOneItem(contactID);
                 }
                 else if(this.readyState == 4 && this.status == 403){
                         alert("Your request is wrong.\n Please try again");
                     }
-                    else{
+                    else if(this.status == 404 || this.status == 403){
                         alert("The action failed.\n Please try again");
                     }
             }
@@ -273,20 +284,24 @@ function handleUpdate(ev){
         let ln = ln_elem.value;
         let phone = phone_elem.value;
         let mail = mail_elem.value;
-        let updated_contact = {'phonenumber': phone, 'firstname': fn, 'lastname': ln, 'email': mail};
+        let updated_contact = new contact(phone, fn, ln, mail);
+        // let updated_contact = {'phonenumber': phone, 'firstname': fn, 'lastname': ln, 'email': mail};
         // update(contactID, updated_contact);
         console.log(updated_contact);
         // Create an XMLHttpRequest object
         const xhttp = new FXMLHttpRequest();
         // Define a callback function
-        xhttp.onload = function() {
+        xhttp.onreadystatechange = function() {
             if(this.readyState == 4 && this.status == 200){
                 showOneItem(contactID);
             }
-            else if(this.readyState == 4 && this.status == 403){
+            else 
+                if(this.readyState == 4 && this.status == 403){
+                    console.log('from update 403');
                     alert("Your request is wrong.\n Please try again");
                 }
-                else{
+                else if(this.status == 404 || this.status == 403){
+                    console.log('from update 404');
                     alert("The action failed.\n Please try again");
                 }
         }
@@ -308,13 +323,14 @@ function handleDelete(ev){
         // Create an XMLHttpRequest object
          const xhttp = new FXMLHttpRequest();
          // Define a callback function
-         xhttp.onload = function() {
+         xhttp.onreadystatechange = function() {
             if(this.readyState == 4 && this.status == 200){
                 alert("The contact was deleted successfully");
                 //return home
                 init();
             }
-            else{
+            else if(this.status == 404 || this.status == 403){
+                console.log('from delete');
                 alert("The action failed.\n Please try again");
             }
          }
@@ -344,16 +360,19 @@ function sendForAdding(ev){
         // Create an XMLHttpRequest object
         const xhttp = new FXMLHttpRequest();
         // Define a callback function
-        xhttp.onload = function() {
+        xhttp.onreadystatechange = function() {
            if(this.readyState == 4 && this.status == 200){
                alert("The contact was added successfully");
                //return home
                init();
            }
-           else if(this.readyState == 4 && this.status == 403){
+           else 
+            if(this.readyState == 4 && this.status == 403){
+                console.log('from add 403');
                 alert("Your request is wrong.\n Please try again");
             }
-            else{
+            else if(this.status == 404 || this.status == 403){
+                console.log('from add 404');
                 alert("The action failed.\n Please try again");
             }
         }
@@ -378,7 +397,8 @@ function returnHome(event){
     // // var temp = document.getElementsByTagName("template")[0];
     // var clon = temp.content.cloneNode(true);
     // document.body.appendChild(clon);
-    init();
+    //init();
+    window.location.href="homepage.html";
 }
 
 function addContact(ev){
@@ -395,7 +415,7 @@ function addContact(ev){
 //     // Create an XMLHttpRequest object
 //     const xhttp = new XMLHttpRequest();
 //     // Define a callback function
-//     xhttp.onload = function() {
+//     xhttp.onreadystatechange = function() {
 //         alert('111');
 //         resp = this.responseText;
 //         alert(resp);
@@ -446,6 +466,29 @@ function addContact(ev){
     //     this.style.color = "#F00";
     //     })
     // }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // const app = {

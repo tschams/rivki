@@ -24,11 +24,12 @@ function login(){
   // Create an XMLHttpRequest object
    const xhttp = new FXMLHttpRequest();
    // Define a callback function
-   xhttp.onload = function() {
-    if (this.status == 200){
+   xhttp.onreadystatechange = function() {
+    if (this.readyState == 4){
+      if (this.status == 200){
         // open("homepage.html");
         // window.top.close();
-        enter();
+        enter(user_in);
     }
     else{
       if(this.status == 404){
@@ -37,6 +38,8 @@ function login(){
         alert("Username or password is incorrect");
       }
     }
+    }
+    
    }
    
    // Send a request
@@ -67,32 +70,35 @@ function login(){
   
 }
 function signup(){
-  
-  let password=document.getElementById("psw").value;
-  let name=document.getElementById("name").value;
-  let newUser = new user(password, name);
-  // Create an XMLHttpRequest object
-  const xhttp = new FXMLHttpRequest();
-  // Define a callback function
-  xhttp.onload = function() {
-    if (this.status == 200){
-      // open("homepage.html");
-      // window.top.close();
-      enter();
-  }
-  else{
-    if(this.status == 404){
-      alert("The page was not found");
-    }else{
-      alert("Username is already taken.\n Please choose another one");
+    
+    let password=document.getElementById("psw").value;
+    let name=document.getElementById("name").value;
+    let newUser = new user(password, name);
+    // Create an XMLHttpRequest object
+    const xhttp = new FXMLHttpRequest();
+    // Define a callback function
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4){
+        if(this.status == 200){
+          // open("homepage.html");
+          // window.top.close();
+          alert("Congratulations!!!\nYou have successfully registered.")
+          enter(newUser);
+      }
+      else{
+        if(this.status == 404){
+          alert("The page was not found");
+        }else {
+          alert("Username is already taken.\n Please choose another one");
+        }
+      }
     }
   }
- }
-  
-  // Send a request
-  let url = '/api/signup';
-  xhttp.open("POST", url, true, name, password);
-  xhttp.send(newUser);
+    
+    // Send a request
+    let url = '/api/signup';
+    xhttp.open("POST", url, true, name, password);
+    xhttp.send(newUser);
 
 
   // if(password!=document.getElementById("pswrpt").value || localStorage.getItem(password)!=null ){
@@ -116,16 +122,22 @@ function signup(){
 }
 
 function enter(user){
+  // before you enter to the naxt page, save the cuurrent user
+  // for internal use
+
     // Create an XMLHttpRequest object
     const xhttp = new FXMLHttpRequest();
     // Define a callback function
-    xhttp.onload = function() {
-      if (this.status == 200){
-        window.location.href="homepage.html";
-    }
-    else{
-      enter(user);
-    }
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4){
+        if (this.status == 200){
+          window.location.href="homepage.html";
+      }
+      else{
+        enter(user);
+      }
+      }
+      
    }
     
     // Send a request

@@ -6,14 +6,15 @@ function serverrecieve(fajax)
     
     let statusnum=404;
     let statustext="not found";
+    let url = fajax.url.replace("/api/", "");
     if(method==="POST"){//add contact
-      if(fajax.data instanceof contact){
+      if(url == 'contacts'){
         database.set(fajax.username, fajax.data);
         statusnum=200;
         statustext="ok";
       }
       else{
-        if( fajax.data instanceof user){//user sign up
+        if(url == 'signup'){//user sign up
           let check= database.setuser(fajax.data);
           if(check===false){
             statusnum=403;
@@ -24,17 +25,21 @@ function serverrecieve(fajax)
             statustext="ok";
           }
         }
-        else{//data wasn't valid
-          statusnum=403;
-          statustext="forbidden";
-        }
+        else
+          if(url == "setcurrentuser"){
+            //implement
+          }
+            else{//data wasn't valid
+              statusnum=403;
+              statustext="forbidden";
+            }
         
       }
      
 
     }
     if(method==="GET"){
-      if(fajax.data instanceof Number){//get one
+      if(url.startsWith("contacts/") && url.replace("contacts/", "") instanceof Number){//get one
         text= database.get(fajax.username, fajax.data);
         if(text!=null){
           statusnum=200;
@@ -44,7 +49,7 @@ function serverrecieve(fajax)
       
       }
       else{
-        if(fajax.data === ""){//get all
+        if(fajax.data === "contacts"){//get all
           text= database.getall(fajax.username)
           if(text!=null){
             statusnum=200;
@@ -52,29 +57,37 @@ function serverrecieve(fajax)
           }
         }
         else{
-          if(fajax.data instanceof user){//sign in
-            text= database.getuser(fajax.data);
-              if(text===null){
-                statusnum=404;
-                statustext="not found";
-              }
-              else{
-                statusnum=200;
-                statustext="ok";
-              }
-            }
-            else{//data wasn't valid
-              statusnum=403;
-              statustext="forbidden";
+          if(url == "getcurrentuser"){
+            //implement
           }
-        }
+          else{
+            let user1 = new user(fajax.password, fajax.username);
+            if(url == "login"){//sign in
+              text= database.getuser(user1);
+                if(text===null){
+                  statusnum=404;
+                  statustext="not found";
+                }
+                else{
+                  statusnum=200;
+                  statustext="ok";
+                }
+              }
+              else{//data wasn't valid
+                statusnum=403;
+                statustext="forbidden";
+            }
+          }
+            
+          }
+            
         
       }
       
 
     }
     if(method==="PUT"){//or patch? 
-      if(fajax.data instanceof contact){
+      if(url.startsWith("contacts/") && url.replace("contacts/", "") instanceof Number){
        let check=database.update(fajax.username, fajax.data);
        if(check===true){
         statusnum=200;
@@ -87,7 +100,7 @@ function serverrecieve(fajax)
       }
     }
     if(method==="DELETE"){//or patch?
-      if(fajax.data instanceof contact){
+      if(rl.startsWith("contacts/") && url.replace("contacts/", "") instanceof Number){
         let check=database.remove(fajax.user, fajax.data);
         if(check===true){
           statusnum=200;
