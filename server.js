@@ -2,14 +2,8 @@
 function serverrecieve(fajax)
 {
     let method=fajax.method;
-    //POST, GET, PUT, and DELETE. These correspond to create, read, update, and delete
     let text="";
-      /*
-  status + statustext:
-  200 ok
-  403 forbidden
-  404 not found
-  */
+    
     let statusnum=404;
     let statustext="not found";
     if(method==="POST"){//add contact
@@ -117,7 +111,9 @@ function serverrecieve(fajax)
   /*
 things to do:
 
-getby
+readystate 3 pretend its waiting
+find out where to stringify
+find out if there are two db files
   
   */  
 
@@ -126,5 +122,14 @@ getby
 
 }
 
+
+  /*
+  status + statustext:
+  200 ok
+  403 forbidden
+  404 not found
+  */
+
+//POST, GET, PUT, and DELETE. These correspond to create, read, update, and delete
 
 
