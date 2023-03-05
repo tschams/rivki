@@ -1,7 +1,7 @@
 
 // Get the modal
-// var modal = document.getElementById('id01');
-// var modal2=document.getElementById('id02');
+var modal = document.getElementById('id01');
+var modal2=document.getElementById('id02');
 //var enter=false;
 
 // When the user clicks anywhere outside of the modal, close it
@@ -127,7 +127,7 @@ function signup(){
   
 }
 
-function enter(user){
+function enter(person){
   // before you enter to the naxt page, save the cuurrent user
   // for internal use
 
@@ -140,7 +140,7 @@ function enter(user){
         window.location.href="homepage.html";
     }
     else{
-      enter(user);
+      enter(person);
     }
       }
       
@@ -148,8 +148,8 @@ function enter(user){
     
     // Send a request
     let url = '/api/setcurrentuser';
-    xhttp.open("POST", url);
-    xhttp.send(user);
+    xhttp.open("POST", url, true, person.name);
+    xhttp.send(person.name);
 
   // window.location.href="homepage.html";
   // open("homepage.html");

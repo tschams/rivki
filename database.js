@@ -15,15 +15,15 @@ function getall(username)
 {
     let result=[];
     let items= JSON.parse(localStorage.getItem(username));
-    if(items != null){
-        for(i=0; i<items.length; i++){
-            console.log(items[i]);
-            if(items[i].id!=-1){
-                result.push(items[i]);
-            }
+    if(items==null){
+        return result;
+    }
+    for(i=0; i<items.length; i++){
+        console.log(items[i]);
+        if(items[i].id!=-1){
+            result.push(items[i]);
         }
     }
-    
     return result;
 }
 function update(username, id, item)
@@ -125,7 +125,7 @@ function getuser(username){
 }
 //the current user is saved in the local storage
 function getcurrentuser(){
-    return JSON.parse(localStorage.getItem("currentuser"));
+     return JSON.parse(localStorage.getItem("currentuser"));
 }
 function setcurrentuser(name){
     let cu = localStorage.currentUser;
