@@ -98,8 +98,9 @@ function serverrecieve(fajax)
 
     }
     if(method==="PUT"){ 
-      if(url.startsWith("contacts/") && url.replace("contacts/", "") instanceof Number){
-       let check=update(fajax.username, fajax.data);
+      let id = url.replace("contacts/", "");
+      if(url.startsWith("contacts/") && !isNaN(parseFloat(url.replace("contacts/", "")))){
+       let check=update(fajax.username, id);
        if(check===true){
         statusnum=200;
         statustext="ok";
