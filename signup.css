@@ -1,0 +1,53 @@
+html,
+body {
+    height: 100%;
+}
+
+body {
+    background-size: cover;
+    background-image: url('images/background_home.jpg');
+    background-repeat: no-repeat;
+    text-align: center;
+    font-family: Verdana, Geneva, sans-serif;
+}
+
+h1,
+h2 {
+    font-family: Verdana, Geneva, sans-serif;
+    font-variant: small-caps;
+}
+
+h1 {
+    margin-top: 50px;
+    font-family: cursive;
+    font-size: 100px;
+}
+
+#containerSignIn {
+    display: none;
+}
+
+input {
+    border-radius: 5px;
+    width: 200px;
+    text-align-last: center;
+    margin: 10px;
+}
+
+.inputButton {
+    cursor: pointer;
+}
+
+.divUsername,
+.divPassword {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: flex-end;
+    font-size: 2vw;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#message {
+    color: red;
+}
