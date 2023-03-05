@@ -15,7 +15,7 @@
 </head>
 
 <header>
-    <h1>PLAY IT</h1>
+    <h1>CONTACT YOUR CONTACTS</h1>
 </header>
 
 <body>
@@ -34,23 +34,23 @@
             <input class="inputButton" id="logIn" name="logIn" type="button" value="LOG IN"><br>
             <input class="inputButton" type="button" id="createAccount" name="createAccount" value="Create account"
                 onclick="switchVisible();">
-            <input class="inputButton" type="button" id="newPassword" value="Forgot your password?">
+            <!-- <input class="inputButton" type="button" id="newPassword" value="Forgot your password?"> -->
         </form>
     </div>
 
     <div id="containerSignIn">
-        <h2>SIGN IN</h2>
+        <h2>SIGN UP</h2>
         <form id="form2">
             <input type="text" id="nameSignIn" maxlength="10" name="nameSignIn" placeholder="Choose a User Name"
                 size="100" required><br>
             <input type="password" id="passwordSignIn" name="passwordSignIn" placeholder="Choose a Password" size="100"
                 minlength="8" maxlength="10" required><br>
-            <input id="signIn" name="signIn" class="inputButton" type="button" value="Sign in" formaction=""
+            <input id="signIn" name="signIn" class="inputButton" type="button" value="Sign up" formaction=""
                 onclick="switchVisible();">
         </form>
     </div>
 
-    <div hidden id="containerForgot">
+    <!-- <div hidden id="containerForgot">
         <h2>NEW PASSWORD</h2>
         <form id="form3">
             <input type="text" id="nameForgot" name="nameForgot" maxlength="10" placeholder="Enter your user name"
@@ -59,7 +59,7 @@
                 min="8" max="10" required><br>
             <input id="update" name="update" class="inputButton" type="button" value="Update"><br>
         </form>
-    </div>
+    </div> -->
     <label id="message"></label>
 
 </body>

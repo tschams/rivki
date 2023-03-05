@@ -102,25 +102,27 @@ function setuser(person){
     if(users==null){
         users=[];
     }
-    else{
-        localStorage.removeItem("users");
-    }
+
     for(i=0; i<users.length; i++){
         if(users[i].password===person.password||users[i].name===person.name){
             return false;
         }
     }
     users.push(person);
+    localStorage.removeItem("users");
     localStorage.setItem("users", JSON.stringify(users));
     return true;
 }
 function getuser(username){
     let users=JSON.parse(localStorage.getItem("users"));
-    for(i=0; i<users.length; i++){
-        if(users[i].name===username){
-            return users[i].password;
+    if(users!=undefined){
+        for(i=0; i<users.length; i++){
+            if(users[i].name===username){
+                return users[i].password;
+            }
         }
     }
+    
     return null;
 }
 //the current user is saved in the local storage
@@ -129,7 +131,7 @@ function getcurrentuser(){
 }
 function setcurrentuser(name){
     let cu = localStorage.currentUser;
-    if(!cu==undefined){
+    if(cu!=undefined){
         localStorage.removeItem("currentuser");
     }
     // localStorage.currentuser = JSON.stringify(name);

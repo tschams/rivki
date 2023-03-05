@@ -110,47 +110,38 @@ function handleClick(event) {
             }, 5000);
             return;
         }
-        //Make sure that userName and password exist (respectively)
-        // if (isExistUser(userName, password)) {
-        //     open("games.html");
-        //     window.top.close();
         // Create an XMLHttpRequest object
         const xhttp = new FXMLHttpRequest();
         // Define a callback function
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4){
-            if (this.status == 200){
-                console.log('in login 200 ok');
-                // open("homepage.html");
-                // window.top.close();
-                console.log(this.responseText);
-                if(this.responseText == user_in.password){
-                enter(user_in);
-                // open("homepage.html");
-                // window.top.close();
+                if (this.status == 200){
+                    console.log('in login 200 ok');
+                    // open("homepage.html");
+                    // window.top.close();
+                    console.log(this.responseText);
+                    if(this.responseText == user_in.password){
+                        enter(user_in);
+                    }
                 }
-                
-            }
-            else{
-                //alert("Username or password is incorrect");
-                document.getElementById("message").innerHTML = "User name or password are not correct. Try log in aggain";
-                setTimeout(function () {
-                document.getElementById("message").innerHTML = "";
-            }, 3000);
-            }
-            }
-        
-    }
-    
-    // Send a request
+                else{
+                        // alert("Username or password is incorrect");
+                        document.getElementById("message").innerHTML = "User name or password are not correct. Try log in again";
+                        setTimeout(function () {
+                        document.getElementById("message").innerHTML = "";
+                    }, 3000);
+                }
+            }    
+        }
+        // Send a request
     let url = '/api/login';
     xhttp.open("GET", url, true, user_in.name, user_in.password);
-    xhttp.send();     
-}
+    xhttp.send();   
+    }  
+
 
     //For new user
     if (idStr == "signIn") {
-
         userName = document.getElementById('nameSignIn').value;
         password = document.getElementById('passwordSignIn').value;
         //Make sure there are no empty fields, username contains less than 10 characters, password according to the required format
@@ -158,8 +149,6 @@ function handleClick(event) {
             switchVisible();
             return;
         }
-
-
         let newUser = new user(password, userName);
         // Create an XMLHttpRequest object
         const xhttp = new FXMLHttpRequest();
@@ -196,35 +185,6 @@ function handleClick(event) {
 }
 
 
-
-
-
-
-       
-
-    // //For user who has forgotten a password or wants to change a password
-    // if (idStr == "update") {
-    //     userName = document.getElementById('nameForgot').value;
-    //     password = document.getElementById('passwordForgot').value;
-    //     //Make sure there are no empty fields, username contains less than 10 characters, password according to the required format
-    //     if (!checkIsValidInput(userName, password)) {
-    //         return;
-    //     }
-    //     //Make sure that userName does exist and update the password
-    //     if (isExistUserForUpdate(userName, password)) {
-    //         ("Your password was updated successfully");
-    //         open('games.html');
-    //         window.top.close();
-    //     }
-    //     else {
-    //         document.getElementById("message").innerHTML = "User name is incorrect";
-    //         setTimeout(function () {
-    //             document.getElementById("message").innerHTML = "";
-    //         }, 3000);
-    //     }
-    // }
-
-
 function enter(user){
     // before you enter to the naxt page, save the cuurrent user
     // for internal use
@@ -245,9 +205,9 @@ function enter(user){
      }
       
       // Send a request
-      let url = '/api/setcurrentuser';
-      xhttp.open("POST", url);
-      xhttp.send(user);
+    let url = '/api/setcurrentuser';
+    xhttp.open("POST", url, true, user.name);
+    xhttp.send(user.name);
   
     // window.location.href="homepage.html";
     // open("homepage.html");
