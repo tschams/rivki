@@ -1,4 +1,4 @@
-//the contacts are saved in an array in the local storage
+//each user has his contacts saved in an array, with his username as the key
 //deleted contacts are marked with an id of -1
 
 function get(username, id)
@@ -10,38 +10,6 @@ function get(username, id)
         }
     }
     return null;
-}
-function getby(username, key, value)
-{
-    let items=JSON.parse(localStorage.getItem(username));
-    let result=[];
- 
-    for (i = 0; i < items.length; i++) {
-        if(items[i]!=-1){
-            if(key===number){//maybe think how to make this general and specific to our project
-                if(items[i].number=value){
-                    result.push(items[i]);
-                }
-            }
-            if(key===firstname){
-                if(items[i].firstname=value){
-                    result.push(items[i]);
-                }
-            }
-            if(key===lastname){
-                if(items[i].lastname=value){
-                    result.push(items[i]);
-                }
-            }
-            if(key===email){
-                if(items[i].email=value){
-                    result.push(items[i]);
-                }
-            }
-        }
-        
-      }
-      return result;
 }
 function getall(username)
 {
@@ -77,7 +45,7 @@ function update(username, item)
 }
 function remove(username, id)
 {
-    let items=JSON.parse(localStorage.getItem("arr"));
+    let items=JSON.parse(localStorage.getItem(username));
     if(items===null){
         return false;
     }
@@ -108,7 +76,7 @@ function set(username, item)
     }
     localStorage.serialContact = serialContact;
     item.id = serialContact;
-    let items=JSON.parse(localStorage.getItem(user));
+    let items=JSON.parse(localStorage.getItem(username));
     if(items===null)
     {
         console.log(items);
@@ -121,7 +89,7 @@ function set(username, item)
     localStorage.setItem(username, JSON.stringify(items));
    
 }
-//we will have an array of users
+//there is an array of users
 function setuser(person){
     let users=JSON.parse(localStorage.getItem("users"));
     for(i=0; i<users.length; i++){
@@ -143,6 +111,7 @@ function getuser(username){
     }
     return null;
 }
+//the current user is saved in the local storage
 function getcurrentuser(){
     return JSON.parse(localStorage.getItem("currentuser"));
 }
@@ -151,4 +120,37 @@ function setcurrentuser(name){
     localStorage.setItem("currentuser", JSON.stringify(name));
 }
 
+//this is a function we didn't end up using
+function getby(username, key, value)
+{
+    let items=JSON.parse(localStorage.getItem(username));
+    let result=[];
+ 
+    for (i = 0; i < items.length; i++) {
+        if(items[i]!=-1){
+            if(key===number){//maybe think how to make this general and specific to our project
+                if(items[i].number=value){
+                    result.push(items[i]);
+                }
+            }
+            if(key===firstname){
+                if(items[i].firstname=value){
+                    result.push(items[i]);
+                }
+            }
+            if(key===lastname){
+                if(items[i].lastname=value){
+                    result.push(items[i]);
+                }
+            }
+            if(key===email){
+                if(items[i].email=value){
+                    result.push(items[i]);
+                }
+            }
+        }
+        
+      }
+      return result;
+}
 
