@@ -15,6 +15,9 @@ function getall(username)
 {
     let result=[];
     let items= JSON.parse(localStorage.getItem(username));
+    if(items==null){
+        return result;
+    }
     for(i=0; i<items.length; i++){
         console.log(items[i]);
         if(items[i].id!=-1){
@@ -118,7 +121,7 @@ function getuser(username){
 }
 //the current user is saved in the local storage
 function getcurrentuser(){
-    return JSON.parse(localStorage.getItem("currentuser"));
+     return JSON.parse(localStorage.getItem("currentuser"));
 }
 function setcurrentuser(name){
     localStorage.removeItem("currentuser");

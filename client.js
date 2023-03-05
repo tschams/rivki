@@ -1,6 +1,7 @@
 // import {request} from "./network.js";
 addEventListener("load", init);
-const currentUser = addEventListener("load", getCurrentUser);
+//const currentUser = addEventListener("load", getCurrentUser);
+
 
 // find a way to save the current user from the page of login
 
@@ -14,7 +15,7 @@ function getCurrentUser(){
     let myUser;
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200){
-            myUser = JSON.parse(this.responseText);
+            myUser = this.responseText;
         }
         else
         if(this.status == 404 || this.status == 403){
@@ -27,7 +28,7 @@ function getCurrentUser(){
     let url = '/api/getcurrentuser';
     xhttp.open("GET", url);
     xhttp.send();
-    return myUser.name;
+    return myUser;
 }
     
 //const currentUser=getCurrentUser();
@@ -59,8 +60,8 @@ function init(){
                 // let contacts = JSON.parse(this.responseText);
                 let contacts = this.responseText;
                 let element = document.getElementById("myUL");
-                console.log(contacts[0]);
-                console.log(contacts[0].firstname);
+                //console.log(contacts[0]);
+                //console.log(contacts[0].firstname);
                 if(contacts){
                     for(let i=0; i < contacts.length; i++){
                         let listItem = document.createElement("li");
@@ -84,7 +85,7 @@ function init(){
         
      }
 
-     // let currentUser = localStorage.currentUser;
+     let currentUser = getCurrentUser();
      // Send a request
      let url = "/api/contacts";
      xhttp.open("GET", url, true, currentUser);
@@ -191,7 +192,7 @@ function showOneItem(event){
         } 
     }
     // check if it's ok and how to implement it, maybe to make a get request?
-    // let currentUser = localStorage.currentUser;
+     let currentUser = getCurrentUser();
     // Send a request
     let url = "/api/contacts/" + idStr;
     xhttp.open("GET", url, true, currentUser);
@@ -237,7 +238,7 @@ function showOneItem(event){
                         alert("The action failed.\n Please try again");
                     }
             }
-            // let currentUser = localStorage.currentUser;
+            let currentUser = getCurrentUser();
             // Send a request
             let url = '/api/contacts/' + idStr;
             xhttp.open("PUT", url, true, currentUser);
@@ -299,7 +300,7 @@ function handleUpdate(ev){
         } 
     }
     // check if it's ok and how to implement it, maybe to make a get request?
-    // let currentUser = localStorage.currentUser;
+    let currentUser = getCurrentUser();
     // Send a request
     let url = "/api/contacts/" + idStr;
     xhttp.open("GET", url, true, currentUser);
@@ -386,8 +387,8 @@ function sendForUpdate(ev){
                 alert("The action failed.\n Please try again");
             }
     }
-    // let currentUser = localStorage.currentUser;
     // Send a request
+    let currentUser = getCurrentUser();
     let url = '/api/contacts/' + idStr;
     xhttp.open("PUT", url, true, currentUser);
     xhttp.send(updated_contact);
@@ -414,7 +415,7 @@ function handleDelete(ev){
             }
          }
          // check if it's ok and how to implement it, maybe to make a get request?
-         // let currentUser = localStorage.currentUser;
+         let currentUser = getCurrentUser();
          // Send a request
          let url = '/api/contacts/' + contactID;
          xhttp.open("DELETE", url, true, currentUser);
@@ -459,7 +460,7 @@ function sendForAdding(ev){
             }
         }
         // check if it's ok and how to implement it, maybe to make a get request?
-        // let currentUser = localStorage.currentUser;
+        let currentUser = getCurrentUser();
         // Send a request
         let url = '/api/contacts';
         xhttp.open("POST", url, true, currentUser);
