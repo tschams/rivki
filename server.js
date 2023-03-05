@@ -1,4 +1,3 @@
-
 function serverrecieve(fajax)
 {
 
@@ -81,7 +80,7 @@ function serverrecieve(fajax)
     console.log(id);
     if(url.startsWith("contacts/") && !isNaN(parseFloat(id))){//update
       dealt=true;
-      let check=update(fajax.username, id);
+      let check=update(fajax.username, id, fajax.data);
       if(check===true){
       statusnum=200;
       statustext="ok";
@@ -120,6 +119,3 @@ function serverrecieve(fajax)
   403 forbidden
   404 not found
   */
-
-
-

@@ -26,16 +26,20 @@ function getall(username)
     }
     return result;
 }
-function update(username, item)
+function update(username, id, item)
 {
+    // let updated_contact = {'phonenumber': phone, 'firstname': fn, 'lastname': ln, 'email': mail};
     let items=JSON.parse(localStorage.getItem(username));
     if(items===null){
         return false;
     }
     let found=false;
     for(i=0; i<items.length; i++){
-        if(items[i].id===item.id){
-            items[i]=item;
+        if(items[i].id==id){
+            items[i].firstname = item.firstname;
+            items[i].lastname = item.lastname;
+            items[i].phonenumber = item.phonenumber;
+            items[i].email = item.email;
             found=true;
         }
     }
@@ -124,7 +128,11 @@ function getcurrentuser(){
      return JSON.parse(localStorage.getItem("currentuser"));
 }
 function setcurrentuser(name){
-    localStorage.removeItem("currentuser");
+    let cu = localStorage.currentUser;
+    if(!cu==undefined){
+        localStorage.removeItem("currentuser");
+    }
+    // localStorage.currentuser = JSON.stringify(name);
     localStorage.setItem("currentuser", JSON.stringify(name));
 }
 
@@ -161,4 +169,3 @@ function getby(username, key, value)
       }
       return result;
 }
-
