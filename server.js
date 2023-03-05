@@ -28,7 +28,9 @@ function serverrecieve(fajax)
         }
         else
           if(url == "setcurrentuser"){
-            //implement
+            database.setcurrentuser(fajax.username);
+            statusnum=200;
+            statustext="ok";
           }
             else{//data wasn't valid
               statusnum=403;
@@ -61,12 +63,15 @@ function serverrecieve(fajax)
         }
         else{
           if(url == "getcurrentuser"){
-            //implement
+            text=database.getcurrentuser();
+            if(text!=null){
+              statusnum=200;
+              statustext="ok";
+            }
           }
           else{
-            let user1 = new user(fajax.password, fajax.username);
             if(url == "login"){//sign in
-              text= getuser(user1);
+              text= database.getuser(fajax.username);
                 if(text===null){
                   statusnum=404;
                   statustext="not found";
@@ -89,7 +94,7 @@ function serverrecieve(fajax)
       
 
     }
-    if(method==="PUT"){//or patch? 
+    if(method==="PUT"){ 
       if(url.startsWith("contacts/") && url.replace("contacts/", "") instanceof Number){
        let check=update(fajax.username, fajax.data);
        if(check===true){
@@ -102,9 +107,9 @@ function serverrecieve(fajax)
         statustext="forbidden";
       }
     }
-    if(method==="DELETE"){//or patch?
+    if(method==="DELETE"){
       if(url.startsWith("contacts/") && url.replace("contacts/", "") instanceof Number){
-        let check=remove(fajax.user, fajax.data);
+        let check=database.remove(fajax.user, fajax.data);
         if(check===true){
           statusnum=200;
           statustext="ok";
@@ -129,7 +134,6 @@ things to do:
 
 readystate 3 pretend its waiting
 find out where to stringify
-find out if there are two db files
   
   */  
 
