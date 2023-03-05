@@ -110,24 +110,32 @@ function set(username, item)
    
 }
 //we will have an array of users
-function setuser(user){
+function setuser(person){
     let users=JSON.parse(localStorage.getItem("users"));
     for(i=0; i<users.length; i++){
-        if(users[i].password===user.password||users[i].name===user.name){
+        if(users[i].password===person.password||users[i].name===person.name){
             return false;
         }
     }
-    users.push(user);
+    users.push(person);
     localStorage.removeItem("users");
     localStorage.setItem("users", JSON.stringify(users));
     return true;
 }
-function getuser(user){
+function getuser(username){
     let users=JSON.parse(localStorage.getItem("users"));
     for(i=0; i<users.length; i++){
-        if(users[i].password===user.password && users[i].name===user.name){
-            return users[i];
+        if(users[i].name===username){
+            return users[i].password;
         }
     }
     return null;
 }
+function getcurrentuser(){
+    return JSON.parse(localStorage.getItem("currentuser"));
+}
+function setcurrentuser(name){
+    localStorage.removeItem("currentuser");
+    localStorage.setItem("currentuser", JSON.stringify(name));
+}
+
