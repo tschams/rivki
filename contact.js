@@ -8,6 +8,7 @@ class contact {
       this.email=email;
       this.id=serial;
       serial++;
+      console.log(this.id);
     }
     get name(){
         return this.firstname+" "+this.lastname;

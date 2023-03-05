@@ -42,8 +42,11 @@ function serverrecieve(fajax)
 
     }
     if(method==="GET"){
-      if(url.startsWith("contacts/") && url.replace("contacts/", "") instanceof Number){//get one
-        text= get(fajax.username, fajax.data);
+      console.log(url);
+      let id = url.replace("contacts/", "");
+      console.log(id);
+      if(url.startsWith("contacts/") && !isNaN(parseFloat(url.replace("contacts/", "")))){//get one
+        text= get(fajax.username, id);
         console.log("text: " + text);
         if(text!=null){
           statusnum=200;
@@ -54,7 +57,7 @@ function serverrecieve(fajax)
       }
       else{
         if(url === "contacts"){//get all
-          text= getall(fajax.username)
+          text= getall(fajax.username);
           console.log("text: " + text);
           if(text!=null){
             statusnum=200;

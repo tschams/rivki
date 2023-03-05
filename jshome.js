@@ -30,18 +30,20 @@ function login(){
         // open("homepage.html");
         // window.top.close();
         console.log(this.responseText);
-        enter(user_in);
+        if(this.responseText == user_in.password){
+          enter(user_in);
+        }
+        
     }
     else{
-      if(this.status == 404){
-        alert("The page was not found");
-      }else{
+      // if(this.status == 404){
+      //   alert("The page was not found");
+      // }else{
         alert("Username or password is incorrect");
       }
     }
     }
     
-   }
    
    // Send a request
    let url = '/api/login';
@@ -127,29 +129,29 @@ function enter(user){
   // before you enter to the naxt page, save the cuurrent user
   // for internal use
 
-    // Create an XMLHttpRequest object
-  //   const xhttp = new FXMLHttpRequest();
-  //   // Define a callback function
-  //   xhttp.onreadystatechange = function() {
-  //     if (this.readyState == 4){
-  //       if (this.status == 200){
-  //       window.location.href="homepage.html";
-  //   }
-  //   else{
-  //     enter(user);
-  //   }
-  //     }
+  // Create an XMLHttpRequest object
+    const xhttp = new FXMLHttpRequest();
+    // Define a callback function
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4){
+        if (this.status == 200){
+        window.location.href="homepage.html";
+    }
+    else{
+      enter(user);
+    }
+      }
       
-  //  }
+   }
     
-  //   // Send a request
-  //   let url = '/api/setcurrentuser';
-  //   xhttp.open("POST", url);
-  //   xhttp.send(user);
+    // Send a request
+    let url = '/api/setcurrentuser';
+    xhttp.open("POST", url);
+    xhttp.send(user);
 
-  window.location.href="homepage.html";
-  open("homepage.html");
-  window.top.close();
+  // window.location.href="homepage.html";
+  // open("homepage.html");
+  // window.top.close();
 }
 
 /*

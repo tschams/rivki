@@ -5,7 +5,7 @@ function get(username, id)
 {
     let items=JSON.parse(localStorage.getItem(username));
     for (i = 0; i < items.length; i++) { 
-        if(items[i].id===id){
+        if(items[i].id==id){
             return items[i]
         }
     }
@@ -46,21 +46,15 @@ function getby(username, key, value)
 function getall(username)
 {
     let result=[];
-    // let items= JSON.parse(localStorage.getItem(username));
-    let items = localStorage.getItem(username);
-    items = 
+    let items= JSON.parse(localStorage.getItem(username));
     for(i=0; i<items.length; i++){
-
+        console.log(items[i]);
+        if(items[i].id!=-1){
+            result.push(items[i]);
+        }
     }
-    // for(i=0; i<items.length; i++){
-    //     if(items[i]!=-1){
-    //         // result.push(items[i]);
-    //         result += items[i];
-    //     }
-    // }
-    return items;
+    return result;
 }
-
 function update(username, item)
 {
     let items=JSON.parse(localStorage.getItem(username));
@@ -104,9 +98,20 @@ function remove(username, id)
 
 function set(username, item)
 {
+    console.log(username);
+    let serialContact = localStorage.serialContact;
+    if(serialContact){
+        serialContact++;
+    } 
+    else{
+        serialContact = 0;
+    }
+    localStorage.serialContact = serialContact;
+    item.id = serialContact;
     let items=JSON.parse(localStorage.getItem(user));
     if(items===null)
     {
+        console.log(items);
         items=[];
     }
     else{
@@ -145,4 +150,5 @@ function setcurrentuser(name){
     localStorage.removeItem("currentuser");
     localStorage.setItem("currentuser", JSON.stringify(name));
 }
+
 
