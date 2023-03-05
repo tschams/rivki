@@ -29,6 +29,7 @@ function login(){
       if (this.status == 200){
         // open("homepage.html");
         // window.top.close();
+        console.log(this.responseText);
         enter(user_in);
     }
     else{
@@ -82,6 +83,7 @@ function signup(){
         if(this.status == 200){
           // open("homepage.html");
           // window.top.close();
+          console.log(this.responseText);
           alert("Congratulations!!!\nYou have successfully registered.")
           enter(newUser);
       }
@@ -126,24 +128,28 @@ function enter(user){
   // for internal use
 
     // Create an XMLHttpRequest object
-    const xhttp = new FXMLHttpRequest();
-    // Define a callback function
-    xhttp.onreadystatechange = function() {
-      if (this.readyState == 4){
-        if (this.status == 200){
-          window.location.href="homepage.html";
-      }
-      else{
-        enter(user);
-      }
-      }
+  //   const xhttp = new FXMLHttpRequest();
+  //   // Define a callback function
+  //   xhttp.onreadystatechange = function() {
+  //     if (this.readyState == 4){
+  //       if (this.status == 200){
+  //       window.location.href="homepage.html";
+  //   }
+  //   else{
+  //     enter(user);
+  //   }
+  //     }
       
-   }
+  //  }
     
-    // Send a request
-    let url = '/api/setcurrentuser';
-    xhttp.open("POST", url);
-    xhttp.send(user);
+  //   // Send a request
+  //   let url = '/api/setcurrentuser';
+  //   xhttp.open("POST", url);
+  //   xhttp.send(user);
+
+  window.location.href="homepage.html";
+  open("homepage.html");
+  window.top.close();
 }
 
 /*

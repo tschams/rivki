@@ -46,14 +46,21 @@ function getby(username, key, value)
 function getall(username)
 {
     let result=[];
-    items= JSON.parse(localStorage.getItem(username));
+    // let items= JSON.parse(localStorage.getItem(username));
+    let items = localStorage.getItem(username);
+    items = 
     for(i=0; i<items.length; i++){
-        if(items[i]!=-1){
-            result.push(items[i])
-        }
+
     }
-    return result;
+    // for(i=0; i<items.length; i++){
+    //     if(items[i]!=-1){
+    //         // result.push(items[i]);
+    //         result += items[i];
+    //     }
+    // }
+    return items;
 }
+
 function update(username, item)
 {
     let items=JSON.parse(localStorage.getItem(username));

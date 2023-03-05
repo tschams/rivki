@@ -1,8 +1,12 @@
+//import {request} from "./network";
+
 class FXMLHttpRequest {
+  
   constructor(){
     this.onreadystatechange=()=>{};
     this.readystate=0;   
   }
+  
   open(method, url, async=true, username="", password = ""){
     
     this.method=method;
@@ -15,16 +19,17 @@ class FXMLHttpRequest {
     
   }
   send(data=null){
+    
     this.data=data;
-    this.readystate=2;
+    this.readyState=2;
     this.onreadystatechange();
-    let reponse=network.request(this);
-    this.readystate=3;//pretend its waiting
+    let response = request(this);
+    this.readyState=3;//pretend its waiting
     this.onreadystatechange();
-    this.text=response.responsetext;
+    this.responseText=response.responsetext;
     this.status=response.status;
     this.message=response.message;
-    this.readystate=4;
+    this.readyState=4;
     this.onreadystatechange();
   }
    

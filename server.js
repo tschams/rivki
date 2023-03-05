@@ -1,6 +1,7 @@
 
 function serverrecieve(fajax)
 {
+
     let method=fajax.method;
     let text="";
     
@@ -9,13 +10,13 @@ function serverrecieve(fajax)
     let url = fajax.url.replace("/api/", "");
     if(method==="POST"){//add contact
       if(url == 'contacts'){
-        database.set(fajax.username, fajax.data);
+        set(fajax.username, fajax.data);
         statusnum=200;
         statustext="ok";
       }
       else{
         if(url == 'signup'){//user sign up
-          let check= database.setuser(fajax.data);
+          let check= setuser(fajax.data);
           if(check===false){
             statusnum=403;
             statustext="forbidden";
@@ -40,7 +41,8 @@ function serverrecieve(fajax)
     }
     if(method==="GET"){
       if(url.startsWith("contacts/") && url.replace("contacts/", "") instanceof Number){//get one
-        text= database.get(fajax.username, fajax.data);
+        text= get(fajax.username, fajax.data);
+        console.log("text: " + text);
         if(text!=null){
           statusnum=200;
           statustext="ok";
@@ -49,8 +51,9 @@ function serverrecieve(fajax)
       
       }
       else{
-        if(fajax.data === "contacts"){//get all
-          text= database.getall(fajax.username)
+        if(url === "contacts"){//get all
+          text= getall(fajax.username)
+          console.log("text: " + text);
           if(text!=null){
             statusnum=200;
             statustext="ok";
@@ -63,7 +66,7 @@ function serverrecieve(fajax)
           else{
             let user1 = new user(fajax.password, fajax.username);
             if(url == "login"){//sign in
-              text= database.getuser(user1);
+              text= getuser(user1);
                 if(text===null){
                   statusnum=404;
                   statustext="not found";
@@ -88,7 +91,7 @@ function serverrecieve(fajax)
     }
     if(method==="PUT"){//or patch? 
       if(url.startsWith("contacts/") && url.replace("contacts/", "") instanceof Number){
-       let check=database.update(fajax.username, fajax.data);
+       let check=update(fajax.username, fajax.data);
        if(check===true){
         statusnum=200;
         statustext="ok";
@@ -100,8 +103,8 @@ function serverrecieve(fajax)
       }
     }
     if(method==="DELETE"){//or patch?
-      if(rl.startsWith("contacts/") && url.replace("contacts/", "") instanceof Number){
-        let check=database.remove(fajax.user, fajax.data);
+      if(url.startsWith("contacts/") && url.replace("contacts/", "") instanceof Number){
+        let check=remove(fajax.user, fajax.data);
         if(check===true){
           statusnum=200;
           statustext="ok";

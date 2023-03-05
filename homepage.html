@@ -74,7 +74,7 @@
           <div><img id="phone" src="images/phone_icon.png"></div>
           <div>
             <label>Phone Number:</label>
-            <input id="add_phone" type="text" required></div>
+            <input id="add_phone" type="text" maxlength="10" required></div>
           <div><img id="email" src="images/email_icon.png"></div>
           <div>
             <label>Email Address:</label>
@@ -108,7 +108,7 @@
           <div>
             <label>Email Address:</label>
             <input id="update_mail" type="text"></div>
-          <button id="update_final">SEND DETAILS FOR UPDATE</button>
+          <button id="update_final" onclick="sendForUpdate()">SEND DETAILS FOR UPDATE</button>
           <p name="contactID"></p>
           </form>
           
