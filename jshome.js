@@ -93,7 +93,7 @@ function signup(){
         if(this.status == 404){
           alert("The page was not found");
         }else {
-          alert("Username is already taken.\n Please choose another one");
+          alert("Username or password is already taken.\n Please choose another one");
         }
       }
     }

@@ -1,6 +1,6 @@
 // import {request} from "./network.js";
 addEventListener("load", init);
-//const currentUser = addEventListener("load", getCurrentUser);
+const currentUser = addEventListener("load", getCurrentUser);
 
 // find a way to save the current user from the page of login
 
@@ -31,7 +31,7 @@ function getCurrentUser(){
 }
     
 //const currentUser=getCurrentUser();
-const currentUser='yisca';
+//const currentUser='yisca';
 
 
 
@@ -406,7 +406,7 @@ function handleDelete(ev){
             if(this.readyState == 4 && this.status == 200){
                 alert("The contact was deleted successfully");
                 //return home
-                init();
+                returnHome();
             }
             else if(this.status == 404 || this.status == 403){
                 console.log('from delete');
