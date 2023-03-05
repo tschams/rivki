@@ -1,4 +1,3 @@
-
 function serverrecieve(fajax)
 {
 
@@ -28,7 +27,7 @@ function serverrecieve(fajax)
     }
     if(url == "setcurrentuser"){
       dealt=true;
-      database.setcurrentuser(fajax.username);
+      setcurrentuser(fajax.username);
       statusnum=200;
       statustext="ok";
     }
@@ -57,7 +56,7 @@ function serverrecieve(fajax)
     }
     if(url == "getcurrentuser"){
       dealt=true;
-      text=database.getcurrentuser();
+      text=getcurrentuser();
       if(text!=null){
         statusnum=200;
         statustext="ok";
@@ -65,7 +64,7 @@ function serverrecieve(fajax)
     }
     if(url == "login"){//sign in
       dealt=true;
-      text= database.getuser(fajax.username);
+      text= getuser(fajax.username);
         if(text===null){
           statusnum=404;
           statustext="not found";
@@ -81,7 +80,7 @@ function serverrecieve(fajax)
     console.log(id);
     if(url.startsWith("contacts/") && !isNaN(parseFloat(id))){//update
       dealt=true;
-      let check=update(fajax.username, id);
+      let check=update(fajax.username, id, fajax.data);
       if(check===true){
       statusnum=200;
       statustext="ok";
@@ -120,6 +119,3 @@ function serverrecieve(fajax)
   403 forbidden
   404 not found
   */
-
-
-

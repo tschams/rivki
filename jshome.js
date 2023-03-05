@@ -1,17 +1,17 @@
 
 // Get the modal
-var modal = document.getElementById('id01');
-var modal2=document.getElementById('id02');
-var enter=false;
+// var modal = document.getElementById('id01');
+// var modal2=document.getElementById('id02');
+//var enter=false;
 
 // When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target === modal) {
-    modal.style.display = "none";
+// window.onclick = function(event) {
+//   if (event.target === modal) {
+//     modal.style.display = "none";
   
-  }
+//   }
  
-}
+// }
 
 function login(){
 
@@ -27,11 +27,14 @@ function login(){
    xhttp.onreadystatechange = function() {
     if (this.readyState == 4){
       if (this.status == 200){
+        console.log('in login 200 ok');
         // open("homepage.html");
         // window.top.close();
         console.log(this.responseText);
         if(this.responseText == user_in.password){
           enter(user_in);
+          // open("homepage.html");
+          // window.top.close();
         }
         
     }
@@ -44,7 +47,6 @@ function login(){
     }
     }
     
-   
    // Send a request
    let url = '/api/login';
    xhttp.open("GET", url, true, user_in.name, user_in.password);
