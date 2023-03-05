@@ -51,7 +51,7 @@ function remove(username, id)
     }
     let found=false;
     for(i=0; i<items.length; i++){
-        if(items[i].id===id){
+        if(items[i].id==id){
             items[i].id=-1;
             found=true;
         }
@@ -92,13 +92,18 @@ function set(username, item)
 //there is an array of users
 function setuser(person){
     let users=JSON.parse(localStorage.getItem("users"));
+    if(users==null){
+        users=[];
+    }
+    else{
+        localStorage.removeItem("users");
+    }
     for(i=0; i<users.length; i++){
         if(users[i].password===person.password||users[i].name===person.name){
             return false;
         }
     }
     users.push(person);
-    localStorage.removeItem("users");
     localStorage.setItem("users", JSON.stringify(users));
     return true;
 }

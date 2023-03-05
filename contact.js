@@ -1,4 +1,3 @@
-let serial=0;
 class contact {
 
     constructor(phonenumber, firstname, lastname, email){//maybe add more....
@@ -6,9 +5,7 @@ class contact {
       this.firstname=firstname;
       this.lastname=lastname;
       this.email=email;
-      this.id=serial;
-      serial++;
-      console.log(this.id);
+      this.id=-1;
     }
     get name(){
         return this.firstname+" "+this.lastname;

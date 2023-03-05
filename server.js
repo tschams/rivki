@@ -37,7 +37,7 @@ function serverrecieve(fajax)
     console.log(url);
     let id = url.replace("contacts/", "");
     console.log(id);
-    if(url.startsWith("contacts/") && !isNaN(parseFloat(url.replace("contacts/", "")))){//get one contact
+    if(url.startsWith("contacts/") && !isNaN(parseFloat(id))){//get one contact
       dealt=true;
       text= get(fajax.username, id);
       console.log("text: " + text);
@@ -77,9 +77,11 @@ function serverrecieve(fajax)
       }
   }
   if(fajax.method==="PUT"){ 
-    if(url.startsWith("contacts/") && url.replace("contacts/", "") instanceof Number){//update contact
+    let id = url.replace("contacts/", "");
+    console.log(id);
+    if(url.startsWith("contacts/") && !isNaN(parseFloat(id))){//update
       dealt=true;
-      let check=update(fajax.username, fajax.data);
+      let check=update(fajax.username, id);
       if(check===true){
       statusnum=200;
       statustext="ok";
@@ -87,16 +89,15 @@ function serverrecieve(fajax)
     }
   }
   if(fajax.method==="DELETE"){
-    if(url.startsWith("contacts/") ){//fix this!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      url=url.replace("contacts/", "");
-      if(url instanceof Number){
+    let id = url.replace("contacts/", "");
+    console.log(id);
+    if(url.startsWith("contacts/") && !isNaN(parseFloat(id))){//delete
         dealt=true;
-        let check=database.remove(fajax.user, fajax.data);
+        let check=remove(fajax.username, id);
         if(check===true){
         statusnum=200;
         statustext="ok";
         }
-      }
       
     }
   }
