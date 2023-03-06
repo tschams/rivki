@@ -19,12 +19,6 @@
     <template class="page active" id="home">
       <div id="phonebook">
         <h2>My Phonebook</h2>
-      <!-- <ol>
-        <li><a href="#" data-target="home" class="nav-link">HOME</a></li>
-        <li><a href="#" data-target="show-contact" class="nav-link">SHOW CONTACT</a></li>
-        <li><a href="#" data-target="update-contact" class="nav-link">UPDATE CONTACT</a></li>
-        <li><a href="#" data-target="add-contact" class="nav-link">ADD CONTACT</a></li>
-      </ol> -->
         <div id="options">   
           <input type="text" id="mySearch" onkeyup="search()" placeholder="Search for names.." title="Type in a name">
           <input type="button" id="myAdd" name="add" value="Add a contact" title="Add a contact" onclick="addContact()"> 
@@ -39,7 +33,7 @@
     <template class="page" id="show-contact">
       <!-- <input type="button" id="returnHomeFromShow" name="return_home" title="Return home page" onclick="returnHome()"> -->
       <div id="showContact">
-        <img src="images/home_icon.png" id="returnHomeFromShow" onclick="returnHome()">
+        <img src="images/home_icon.png" id="returnHomeFromShow" onclick="returnHome()" width="120px">
       <div id="details">
         <h2>View the details of:</h2>
         <input type="button" id="myUpdate" value="Update" title="Update a contact" onclick="handleUpdate()">
@@ -103,7 +97,7 @@
           <div><img id="phone" src="images/phone_icon.png"></div>
           <div>
             <label>Phone Number:</label>
-            <input id="update_phone" type="text"></div>
+            <input id="update_phone" type="text" maxlength="10"></div>
           <div><img id="email" src="images/email_icon.png"></div>
           <div>
             <label>Email Address:</label>
