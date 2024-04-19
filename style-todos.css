@@ -1,0 +1,166 @@
+body {
+	background-size: cover;
+	background-repeat: no-repeat;
+	font-family: Verdana, Geneva, sans-serif;
+	background: blanchedalmond;
+}
+* {
+	box-sizing: border-box;
+	direction: ltr;
+}
+
+img {
+	height: 70px;
+	width: 70px;
+}
+
+h2 {
+	direction: ltr;
+	width: 100%;
+}
+
+#options {
+	align-self: center;
+}
+
+#options > input {
+	direction: ltr;
+	position: left;
+	padding-left: 30px;
+	background-size: 20px;
+	background-position: 10px 12px;
+	background-repeat: no-repeat;
+	width: 24.5%;
+	font-size: 16px;
+	padding: 12px 20px 12px 40px;
+	border: 1px solid #ddd;
+	margin-bottom: 12px;
+	background-color: #f6f6f6;
+}
+
+#mySearch {
+	background-image: url('images/search_icon.png');
+}
+
+#myAdd {
+	background-image: url('images/add_icon.jpeg');
+}
+
+#myUpdate {
+	background-image: url('images/update_icon.png');
+}
+
+#myDelete {
+	background-image: url('images/delete_icon.png');
+}
+
+#returnHome {
+	width: 100px;
+}
+
+#details > input {
+	direction: ltr;
+	position: left;
+	padding-left: 30px;
+	background-size: 20px;
+	background-position: 10px 12px;
+	background-repeat: no-repeat;
+	width: 400px;
+	font-size: 16px;
+	padding: 12px 20px 12px 40px;
+	border: 1px solid #ddd;
+	margin-bottom: 12px;
+	margin-left: 500px;
+}
+
+.one_item-grid-container > div > input {
+	width: 180px;
+	height: 40px;
+	align-items: center;
+}
+
+#myUL {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+#myUL li {
+	border: 1px solid #ddd;
+	margin-top: -1px; /* Prevent double borders */
+	background-color: #f6f6f6;
+	padding: 11px;
+	text-decoration: none;
+	font-size: 18px;
+	color: black;
+	display: block;
+}
+
+#myUL li a:hover:not(.header) {
+	background-color: #eee;
+}
+
+/* #show_item{
+      align-items: center;
+      margin: auto;
+      width: 50%;
+      border: 3px solid green;
+      padding: 10px;
+    } */
+
+.grid-container {
+	margin: auto;
+	margin-top: 100px;
+
+	width: 50%;
+	border: 3px solid green;
+	padding: 10px;
+	background: white;
+}
+.width-100 {
+	width: 100%;
+}
+
+.grid-container > div {
+	background-color: rgba(255, 255, 255, 0.8);
+	padding: 5px;
+	font-size: 20px;
+	width: auto;
+}
+
+/**** PAGES ****/
+/*.page{
+  display: none;
+  width: 100%;
+  min-height: 100%; /* allow for content off the bottom of the page */
+/*position: fixed;  /* or absolute if the user needs to scroll for more content*/
+/* padding: 1rem 2rem;
+} 
+/* .active{
+  display: block; 
+} */
+
+#home,
+#show-todo,
+#add-todo,
+#update-todo {
+	display: none;
+}
+
+#home {
+	display: none;
+}
+
+/*
+#home, #add-todo{
+  background-color: hsl(60, 50%, 80%);
+}
+/* , #show-todo>#details, #update-todo */
+#show_description {
+	width: 100%; /* Adjust this width to match your container's size */
+	max-height: 4em; /* Adjust this value based on the size of your container and font */
+	overflow-y: auto; /* Adds scroll if text is longer than the max-height */
+	margin: 0; /* Reset any default margin */
+	padding: 0.5em; /* Adds some space inside the border */
+	word-wrap: break-word; /* Ensures the text breaks to avoid overflow */
+}
